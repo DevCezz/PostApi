@@ -4,3 +4,10 @@ CREATE TABLE POST (
     content VARCHAR(2000) NULL,
     created TIMESTAMP
 );
+
+CREATE TABLE COMMENT (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    post_id BIGINT NOT NULL,
+    content VARCHAR(2000) NULL,
+    created TIMESTAMP
+);

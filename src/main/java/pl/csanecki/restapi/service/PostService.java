@@ -16,4 +16,9 @@ public class PostService {
     public List<Post> getPosts() {
         return postRepository.findAll();
     }
+
+    public Post getSinglePost(long id) {
+        return postRepository.findById(id)
+                .orElseThrow();
+    }
 }

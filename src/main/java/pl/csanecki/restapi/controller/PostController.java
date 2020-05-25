@@ -22,6 +22,6 @@ public class PostController {
 
     @GetMapping("/posts/{postId}")
     public Post getSinglePost(@PathVariable long postId) {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return postService.getSinglePost(postId);
     }
 }

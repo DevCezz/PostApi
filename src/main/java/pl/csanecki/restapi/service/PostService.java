@@ -14,6 +14,6 @@ public class PostService {
     private final PostRepository postRepository;
 
     public List<Post> getPosts() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return postRepository.findAll();
     }
 }

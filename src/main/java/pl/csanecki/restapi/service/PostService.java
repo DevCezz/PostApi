@@ -46,4 +46,8 @@ public class PostService {
                 .filter(comment -> comment.getPostId() == postId)
                 .collect(Collectors.toList());
     }
+
+    public Post addPost(Post post) {
+        throw new IllegalArgumentException("Not implemented yet");
+    }
 }

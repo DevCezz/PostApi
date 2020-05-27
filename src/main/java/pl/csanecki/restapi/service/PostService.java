@@ -9,7 +9,9 @@ import pl.csanecki.restapi.model.Post;
 import pl.csanecki.restapi.repository.CommentRepository;
 import pl.csanecki.restapi.repository.PostRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,5 +47,23 @@ public class PostService {
         return comments.stream()
                 .filter(comment -> comment.getPostId() == postId)
                 .collect(Collectors.toList());
+    }
+
+    public Post addPost(Post post) {
+        return postRepository.save(post);
+    }
+
+    @Transactional
+    public Post editPost(Post editingPost) {
+        Optional<Post> foundPost = postRepository.findById(editingPost.getId());
+        return foundPost.map(post -> {
+            post.setTitle(editingPost.getTitle());
+            post.setContent(editingPost.getContent());
+            return post;
+        }).orElseThrow();
+    }
+
+    public void deletePost(long postId) {
+        postRepository.deleteById(postId);
     }
 }

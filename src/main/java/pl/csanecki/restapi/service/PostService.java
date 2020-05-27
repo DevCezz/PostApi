@@ -24,4 +24,8 @@ public class PostService {
         return postRepository.findById(id)
                 .orElseThrow();
     }
+
+    public List<Post> getPostsWithComments(int page) {
+        throw new IllegalArgumentException("Not implemented yet!");
+    }
 }

@@ -23,6 +23,12 @@ public class PostController {
         return PostDtoMapper.mapToPostDtos(postService.getPosts(requestedPage));
     }
 
+    @GetMapping("/posts/comments")
+    public List<Post> getPostsWithComments(@RequestParam(required = false, defaultValue = "0") int page) {
+        int requestedPage = page > 0 ? page : 0;
+        return postService.getPostsWithComments(requestedPage);
+    }
+
     @GetMapping("/posts/{postId}")
     public Post getSinglePost(@PathVariable long postId) {
         return postService.getSinglePost(postId);

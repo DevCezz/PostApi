@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.csanecki.restapi.model.Post;
+import pl.csanecki.restapi.repository.CommentRepository;
 import pl.csanecki.restapi.repository.PostRepository;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class PostService {
     private static final int PAGE_SIZE = 20;
 
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
     public List<Post> getPosts(int page) {
         return postRepository.findAllPosts(PageRequest.of(page, PAGE_SIZE));
@@ -31,6 +33,7 @@ public class PostService {
         List<Long> postsIds = posts.stream()
                 .map(Post::getId)
                 .collect(Collectors.toList());
+        commentRepository.findAllByPostIdIn(postsIds);
         throw new IllegalArgumentException("Not implemented yet");
     }
 }

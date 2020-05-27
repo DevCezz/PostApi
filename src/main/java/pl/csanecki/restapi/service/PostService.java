@@ -50,4 +50,8 @@ public class PostService {
     public Post addPost(Post post) {
         return postRepository.save(post);
     }
+
+    public Post editPost(Post post) {
+        throw new IllegalArgumentException("Not implemented yet");
+    }
 }

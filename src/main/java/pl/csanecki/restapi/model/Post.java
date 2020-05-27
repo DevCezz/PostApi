@@ -25,6 +25,6 @@ public class Post {
     private LocalDateTime created;
 
     @OneToMany
-    @JoinColumn(name = "postId")
+    @JoinColumn(name = "postId", updatable = false, insertable = false)
     private List<Comment> comments;
 }

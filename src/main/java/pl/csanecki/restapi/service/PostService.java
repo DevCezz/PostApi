@@ -62,4 +62,8 @@ public class PostService {
             return post;
         }).orElseThrow();
     }
+
+    public void deletePost(long postId) {
+        throw new IllegalArgumentException("Not implemented yet");
+    }
 }

@@ -2,6 +2,7 @@ package pl.csanecki.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,5 +47,10 @@ public class PostController {
     @PutMapping("/posts")
     public Post editPost(@RequestBody Post post) {
         return postService.editPost(post);
+    }
+
+    @DeleteMapping("/posts")
+    public void deletePost(long postId) {
+        postService.deletePost(postId);
     }
 }

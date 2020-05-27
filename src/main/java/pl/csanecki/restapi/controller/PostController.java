@@ -9,7 +9,6 @@ import pl.csanecki.restapi.model.Post;
 import pl.csanecki.restapi.service.PostService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,22 +18,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public List<PostDto> getPosts() {
-        return mapToPostDtos(postService.getPosts());
-    }
-
-    private List<PostDto> mapToPostDtos(List<Post> posts) {
-        return posts.stream()
-                .map(this::mapToPostDto)
-                .collect(Collectors.toList());
-    }
-
-    private PostDto mapToPostDto(Post post) {
-        return PostDto.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .created(post.getCreated())
-                .build();
+        return PostDtoMapper.mapToPostDtos(postService.getPosts());
     }
 
     @GetMapping("/posts/{postId}")

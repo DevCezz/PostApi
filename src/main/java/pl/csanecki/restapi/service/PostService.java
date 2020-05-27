@@ -7,6 +7,7 @@ import pl.csanecki.restapi.model.Post;
 import pl.csanecki.restapi.repository.PostRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,10 @@ public class PostService {
     }
 
     public List<Post> getPostsWithComments(int page) {
-        throw new IllegalArgumentException("Not implemented yet!");
+        List<Post> posts = postRepository.findAllPosts(PageRequest.of(page, PAGE_SIZE));
+        List<Long> postsIds = posts.stream()
+                .map(Post::getId)
+                .collect(Collectors.toList());
+        throw new IllegalArgumentException("Not implemented yet");
     }
 }

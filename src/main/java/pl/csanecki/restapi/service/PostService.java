@@ -3,6 +3,7 @@ package pl.csanecki.restapi.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import pl.csanecki.restapi.model.Comment;
 import pl.csanecki.restapi.model.Post;
 import pl.csanecki.restapi.repository.CommentRepository;
 import pl.csanecki.restapi.repository.PostRepository;
@@ -33,7 +34,14 @@ public class PostService {
         List<Long> postsIds = posts.stream()
                 .map(Post::getId)
                 .collect(Collectors.toList());
-        commentRepository.findAllByPostIdIn(postsIds);
-        throw new IllegalArgumentException("Not implemented yet");
+        List<Comment> comments = commentRepository.findAllByPostIdIn(postsIds);
+        posts.forEach(post -> post.setComments(extractComments(comments, post.getId())));
+        return posts;
+    }
+
+    private List<Comment> extractComments(List<Comment> comments, long postId) {
+        return comments.stream()
+                .filter(comment -> comment.getPostId() == postId)
+                .collect(Collectors.toList());
     }
 }

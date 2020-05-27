@@ -64,6 +64,6 @@ public class PostService {
     }
 
     public void deletePost(long postId) {
-        throw new IllegalArgumentException("Not implemented yet");
+        postRepository.deleteById(postId);
     }
 }

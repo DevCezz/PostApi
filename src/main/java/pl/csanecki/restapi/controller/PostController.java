@@ -25,9 +25,9 @@ public class PostController {
     }
 
     @GetMapping("/posts/comments")
-    public List<Post> getPostsWithComments(@RequestParam(required = false, defaultValue = "0") int page) {
+    public List<Post> getPostsWithComments(@RequestParam(required = false, defaultValue = "0") int page, Sort.Direction sort) {
         int requestedPage = page > 0 ? page : 0;
-        return postService.getPostsWithComments(requestedPage);
+        return postService.getPostsWithComments(requestedPage, sort);
     }
 
     @GetMapping("/posts/{postId}")

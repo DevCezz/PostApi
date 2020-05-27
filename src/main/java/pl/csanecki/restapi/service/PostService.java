@@ -31,8 +31,8 @@ public class PostService {
                 .orElseThrow();
     }
 
-    public List<Post> getPostsWithComments(int page) {
-        List<Post> posts = postRepository.findAllPosts(PageRequest.of(page, PAGE_SIZE));
+    public List<Post> getPostsWithComments(int page, Sort.Direction sort) {
+        List<Post> posts = postRepository.findAllPosts(PageRequest.of(page, PAGE_SIZE, Sort.by(sort, POST_ID)));
         List<Long> postsIds = posts.stream()
                 .map(Post::getId)
                 .collect(Collectors.toList());

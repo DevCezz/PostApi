@@ -2,6 +2,7 @@ package pl.csanecki.restapi.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.csanecki.restapi.model.Comment;
 import pl.csanecki.restapi.model.Post;
@@ -15,13 +16,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostService {
 
+    private static final String POST_ID = "id";
     private static final int PAGE_SIZE = 20;
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
 
-    public List<Post> getPosts(int page) {
-        return postRepository.findAllPosts(PageRequest.of(page, PAGE_SIZE));
+    public List<Post> getPosts(int page, Sort.Direction sort) {
+        return postRepository.findAllPosts(PageRequest.of(page, PAGE_SIZE, Sort.by(sort, POST_ID)));
     }
 
     public Post getSinglePost(long id) {

@@ -3,6 +3,7 @@ package pl.csanecki.restapi.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Post {
     private String content;
     private LocalDateTime created;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "postId", updatable = false, insertable = false)
     private List<Comment> comments;
 }
